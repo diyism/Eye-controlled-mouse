@@ -11,7 +11,7 @@
     pip install -r requirements.txt
     python main.py
 
-    手机横放顶部向左(摄像头靠近电脑屏幕),  用手机架放在电脑屏幕右侧, 手机屏幕 刚好与 右眼角膜 形成平行平面,
+    横放手机顶部向左(摄像头靠近电脑屏幕),  用手机架放在电脑屏幕右侧, 手机屏幕 刚好与 右眼角膜 形成平行平面,
     实现了 头不动 眼珠动 来控制 4个 方向键
 
 # Eye-Controlled Mouse using OpenCV and IP Camera
