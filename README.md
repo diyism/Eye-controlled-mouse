@@ -11,6 +11,8 @@
     pip install -r requirements.txt
     python main.py
 
+    手机用手机架放在屏幕右侧, 手机屏幕 刚好与 右眼角膜 形成平行平面, 实现了 4个 方向键的控制
+
 # Eye-Controlled Mouse using OpenCV and IP Camera
 
 This project aims to create an eye-controlled mouse using the inbuilt camera of a computer or an IP camera via a smartphone and OpenCV for image processing. By tracking the user's eye movements, the mouse cursor can be controlled, providing an alternative input method for individuals with limited mobility.
