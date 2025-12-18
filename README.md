@@ -1,3 +1,16 @@
+    #install app into android phone: https://play.google.com/store/apps/details?id=flutter.vdo.ninja
+    #start vod.ninja app
+    sudo apt install v4l2loopback-dkms v4l2loopback-utils
+    sudo modprobe v4l2loopback devices=1 video_nr=10 card_label="VirtualCam" exclusive_caps=1
+    sudo snap install obs-studio
+    sudo ln -s /snap/bin/obs-studio /usr/bin/obs
+    obs
+    #Sources > Add > Browser > name "my phone" >  https://vdo.ninja/?v=XXXXX > Start virtual camera
+    git clone https://github.com/diyism/Eye-controlled-mouse
+    cd Eye-controlled-mouse
+    pip install -r requirements.txt
+    python main.py
+
 # Eye-Controlled Mouse using OpenCV and IP Camera
 
 This project aims to create an eye-controlled mouse using the inbuilt camera of a computer or an IP camera via a smartphone and OpenCV for image processing. By tracking the user's eye movements, the mouse cursor can be controlled, providing an alternative input method for individuals with limited mobility.
