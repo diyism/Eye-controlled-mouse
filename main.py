@@ -1,6 +1,4 @@
-import requests 
-import cv2 
-import numpy as np 
+import cv2
 import mediapipe
 import pyautogui
 
@@ -10,15 +8,22 @@ screen_w, screen_h = pyautogui.size()
 # Specify the desired window width and height
 window_width = 800
 window_height = 600
-  
-# Replace the below URL with your own. Make sure to add "/shot.jpg" at last. 
-url = "http://192.168.0.103:8080/shot.jpg"
-  
-# While loop to continuously fetching data from the Url 
-while True: 
-    img_resp = requests.get(url) 
-    img_arr = np.array(bytearray(img_resp.content), dtype=np.uint8) 
-    image = cv2.imdecode(img_arr, -1) 
+
+# Open the default camera (try device 10 first, then fallback to 0)
+cap = cv2.VideoCapture(10)
+if not cap.isOpened():
+    cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("Error: Could not open camera")
+    exit()
+
+# While loop to continuously get frames from the camera
+while True:
+    ret, image = cap.read()
+    if not ret:
+        print("Error: Could not read frame")
+        break 
 
     image = cv2.flip(image, 1)
     window_h, window_w, _ = image.shape
@@ -38,24 +43,26 @@ while True:
 
             cv2.circle(image, (x, y), 3, (0, 0, 255))
         
-        left_eye = [one_face_landmark_points[145], one_face_landmark_points[159]]
-        for landmark_point in left_eye:
-            x = int(landmark_point.x * window_w)
-            y = int(landmark_point.y * window_h)
-            cv2.circle(image, (x, y), 6, (0, 255, 0))
-        
-        if (left_eye[0].y - left_eye[1].y) < 0.015:
-            pyautogui.click()
-            pyautogui.sleep(0.5)
-            print("Mouse Clicked")
+        # Left eye blink detection (commented out)
+        # left_eye = [one_face_landmark_points[145], one_face_landmark_points[159]]
+        # for landmark_point in left_eye:
+        #     x = int(landmark_point.x * window_w)
+        #     y = int(landmark_point.y * window_h)
+        #     cv2.circle(image, (x, y), 6, (0, 255, 0))
+
+        # if (left_eye[0].y - left_eye[1].y) < 0.015:
+        #     pyautogui.click()
+        #     pyautogui.sleep(0.5)
+        #     print("Mouse Clicked")
 
     # Resize the image to the desired window size
     resized_image = cv2.resize(image, (window_width, window_height))
   
     cv2.imshow("Android_cam", resized_image)
   
-    # Press Esc key to exit 
-    if cv2.waitKey(1) == 27: 
+    # Press Esc key to exit
+    if cv2.waitKey(1) == 27:
         break
-  
+
+cap.release()
 cv2.destroyAllWindows()
